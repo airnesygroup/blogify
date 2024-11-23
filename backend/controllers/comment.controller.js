@@ -7,7 +7,7 @@ export const getPostComments = async (req, res) => {
     .sort({ createdAt: -1 });
 
   res.json(comments);
-};
+}
 
 export const addComment = async (req, res) => {
   const clerkUserId = req.auth.userId;
