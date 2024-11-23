@@ -2,6 +2,13 @@ import ImageKit from "imagekit";
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
+// Hardcoded credentials for ImageKit
+const imagekit = new ImageKit({
+  urlEndpoint: "https://ik.imagekit.io/duu0baatm",  // Replace with your actual URL Endpoint
+  publicKey: "public_yBrgN5njH4NLNA0ns0ts0T7A8b4=",  // Replace with your actual Public Key
+  privateKey: "twbR0TEZWdwnajELdEnygu31KJs="  // Replace with your actual Private Key
+});
+
 export const getPosts = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 2;
@@ -175,12 +182,6 @@ export const featurePost = async (req, res) => {
 
   res.status(200).json(updatedPost);
 };
-
-const imagekit = new ImageKit({
-  urlEndpoint: process.env.IK_URL_ENDPOINT,
-  publicKey: process.env.IK_PUBLIC_KEY,
-  privateKey: process.env.IK_PRIVATE_KEY,
-});
 
 export const uploadAuth = async (req, res) => {
   const result = imagekit.getAuthenticationParameters();

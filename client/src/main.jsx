@@ -16,11 +16,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient();
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key");
-}
+// Hardcoded Clerk publishable key
+const PUBLISHABLE_KEY = "pk_test_cmVmaW5lZC1kcnVtLTk4LmNsZXJrLmFjY291bnRzLmRldiQ";
 
 const router = createBrowserRouter([
   {

@@ -6,9 +6,13 @@ import commentRouter from "./routes/comment.route.js";
 import webhookRouter from "./routes/webhook.route.js";
 import { clerkMiddleware, requireAuth } from "@clerk/express";
 import cors from "cors";
-import dotenv from "dotenv"
+import dotenv from 'dotenv';
 
 dotenv.config();
+console.log("Public Key:", process.env.IK_PUBLIC_KEY);
+console.log("URL Endpoint:", process.env.IK_URL_ENDPOINT);
+console.log("Private Key:", process.env.IK_PRIVATE_KEY);
+
 const app = express();
 
 app.use(cors(process.env.CLIENT_URL));
