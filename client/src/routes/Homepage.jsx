@@ -15,7 +15,7 @@ const Homepage = () => {
       {/* INTRODUCTION */}
       <div className="flex items-center justify-between">
         {/* titles */}
-        <div className="mt-4">
+        <div className="">
           <h1 className="text-gray-800 text-2xl md:text-3xl lg:text-4xl font-bold">
           Become smarter in just 5 minutes
           </h1>
