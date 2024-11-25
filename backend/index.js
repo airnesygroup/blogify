@@ -15,14 +15,22 @@ const app = express();
 
 // CORS middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL,  // Using the environment variable for CLIENT_URL
+  origin: function(origin, callback) {
+    // Allow requests from localhost during development
+    const allowedOrigins = [
+      'http://localhost:5173',  // Local development
+      'https://blogifiyclient.vercel.app' // Production client URL
+    ];
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error('Not allowed by CORS')); // Deny the request
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
-
-app.use(clerkMiddleware());
-app.use("/webhooks", webhookRouter);
-app.use(express.json());
 
 // API routes
 app.use("/users", userRouter);
