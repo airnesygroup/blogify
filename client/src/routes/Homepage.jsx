@@ -20,9 +20,9 @@ const Homepage = () => {
           Become smarter in just 5 minutes
           </h1>
           <p className="mt-8 text-md md:text-xl">
-          Hoolicon delivers quick and insightful updates about the business   </p>
+          Hoolicon delivers quick and insightful updates about the tech world   </p>
           <p className=" text-md md:text-xl">
-          world every day of the week from Wall St. to Silicon Valley.
+          Subscribe to The Hoolicon newsletter: Your 5-minute brief on latest tech news.
           </p>
         </div>
         {/* animated button */}
