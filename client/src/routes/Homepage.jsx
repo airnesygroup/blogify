@@ -22,7 +22,7 @@ const Homepage = () => {
           <p className="mt-8 text-md md:text-xl">
           Hoolicon delivers quick and insightful updates about the tech world   </p>
           <p className=" text-md md:text-xl">
-          Subscribe to The Hoolicon newsletter: Your 5-minute brief on latest tech news.
+          Subscribe to Hoolicon: Your 5-minute brief on latest tech news.
           </p>
         </div>
         {/* animated button */}
