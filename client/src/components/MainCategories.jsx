@@ -8,37 +8,37 @@ const MainCategories = () => {
       <div className="flex-1 flex items-center justify-between flex-wrap">
         <Link
           to="/posts"
-          className="bg-blue-800 text-white rounded-full px-4 py-2"
+          className="bg-blue-800 text-white rounded-full px-4 py-1"
         >
           All Posts
         </Link>
         <Link
           to="/posts?cat=web-design"
-          className="hover:bg-blue-50 rounded-full px-4 py-2"
+          className="hover:bg-blue-50 rounded-full px-4 py-1"
         >
           Web Design
         </Link>
         <Link
           to="/posts?cat=development"
-          className="hover:bg-blue-50 rounded-full px-4 py-2"
+          className="hover:bg-blue-50 rounded-full px-4 py-1"
         >
           Development
         </Link>
         <Link
           to="/posts?cat=databases"
-          className="hover:bg-blue-50 rounded-full px-4 py-2"
+          className="hover:bg-blue-50 rounded-full px-4 py-1"
         >
           Databases
         </Link>
         <Link
           to="/posts?cat=seo"
-          className="hover:bg-blue-50 rounded-full px-4 py-2"
+          className="hover:bg-blue-50 rounded-full px-4 py-1"
         >
           Search Engines
         </Link>
         <Link
           to="/posts?cat=marketing"
-          className="hover:bg-blue-50 rounded-full px-4 py-2"
+          className="hover:bg-blue-50 rounded-full px-4 py-1"
         >
           Marketing
         </Link>
