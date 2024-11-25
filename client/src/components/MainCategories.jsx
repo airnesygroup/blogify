@@ -36,12 +36,7 @@ const MainCategories = () => {
         >
           Search Engines
         </Link>
-        <Link
-          to="/posts?cat=marketing"
-          className="hover:bg-blue-50 rounded-full px-4 py-1"
-        >
-          Marketing
-        </Link>
+      
       </div>
       <span className="text-xl font-medium">|</span>
       {/* search */}
