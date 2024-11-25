@@ -16,12 +16,12 @@ const Homepage = () => {
       <div className="flex items-center justify-between">
         {/* titles */}
         <div className="">
-          <h1 className="text-gray-800 text-2xl md:text-3xl lg:text-4.5xl font-bold">
+          <h1 className="text-gray-800 text-2xl md:text-3xl lg:text-4xl font-bold">
           Become smarter in just 5 minutes
           </h1>
           <p className="mt-8 text-md md:text-xl">
           Hoolicon delivers quick and insightful updates about the business   </p>
-          <p className="mt-8 text-md md:text-xl">
+          <p className=" text-md md:text-xl">
           world every day of the week from Wall St. to Silicon Valley.
           </p>
         </div>
