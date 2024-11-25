@@ -18,7 +18,6 @@ app.use(cors({
   origin: function(origin, callback) {
     // Allow requests from localhost during development
     const allowedOrigins = [
-      'http://localhost:5173',  // Local development
       'https://blogifiyclient.vercel.app' // Production client URL
     ];
     
