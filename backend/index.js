@@ -16,21 +16,21 @@ const app = express();
 // CORS middleware
 app.use(cors({
   origin: function(origin, callback) {
-    // Allow requests from localhost during development
     const allowedOrigins = [
       'http://localhost:5173',  // Local development
-      'https://blogifiyclient.vercel.app' // Production client URL
+      /https:\/\/.*\.vercel\.app/  // Vercel subdomains
     ];
-    
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true); // Allow the request
+
+    if (allowedOrigins.some(pattern => typeof pattern === 'string' ? pattern === origin : pattern.test(origin)) || !origin) {
+      callback(null, true);  // Allow the request
     } else {
-      callback(new Error('Not allowed by CORS')); // Deny the request
+      callback(new Error('Not allowed by CORS'));  // Deny the request
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 
 // API routes
 app.use("/users", userRouter);
