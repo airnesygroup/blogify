@@ -18,13 +18,12 @@ app.use(cors({
   origin: function(origin, callback) {
     // Allow requests from localhost during development
     const allowedOrigins = [
-      'http://localhost:5173', // Local development
-    ];
+      'https://blogifiyclient.vercel.app', // Production client URL
+      'http://localhost:5173',  // Local development
 
-    // Allow any Vercel subdomain to make requests
-    const isVercelDomain = origin && origin.endsWith('.vercel.app');
+    ];
     
-    if (allowedOrigins.indexOf(origin) !== -1 || isVercelDomain) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true); // Allow the request
     } else {
       callback(new Error('Not allowed by CORS')); // Deny the request
@@ -33,8 +32,6 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
-
-
 
 // API routes
 app.use("/users", userRouter);
