@@ -5,10 +5,9 @@ const connectDB = async () => {
     // Hardcoded MongoDB URI
     const uri = "mongodb+srv://airnesyinfo:airnesyinfo@cluster0.54a22.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&dbName=blog";
     
-    await mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    // Connect to MongoDB without deprecated options
+    await mongoose.connect(uri);
+    
     console.log("MongoDB connected successfully!");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error.message);
