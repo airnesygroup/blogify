@@ -1,29 +1,16 @@
-import express from 'express';
-import connectDB from './lib/connectDB.js';
-import userRouter from '../routes/user.route.js';
-import postRouter from '../routes/post.route.js';
-import commentRouter from '../routes/comment.route.js';
-import webhookRouter from '../routes/webhook.route.js';
-import { clerkMiddleware, requireAuth } from '@clerk/express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import fs from 'fs';
-import path from 'path';
+import express from "express";
+import connectDB from "../lib/connectDB.js";
+import userRouter from "../routes/user.route.js";
+import postRouter from "../routes/post.route.js";
+import commentRouter from "../routes/comment.route.js";
+import webhookRouter from "../routes/webhook.route.js";
+import { clerkMiddleware, requireAuth } from "@clerk/express";
+import cors from "cors";
+import mongoose from "mongoose";
+
+import dotenv from "dotenv";
 
 dotenv.config();
-
-// Use import.meta.url to get the directory name equivalent to __dirname
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-
-// Make sure the path to 'lib' is correctly constructed
-const libPath = path.join(__dirname, 'lib');
-
-// Check if the 'lib' folder exists
-if (fs.existsSync(libPath)) {
-  console.log('Lib folder contents:', fs.readdirSync(libPath));
-} else {
-  console.error('Lib folder not found at:', libPath);
-}
 
 // Server setup
 const app = express();
@@ -31,37 +18,46 @@ const app = express();
 // CORS middleware
 app.use(cors({
   origin: function(origin, callback) {
+    // Allow requests from localhost during development
     const allowedOrigins = [
       'https://blogifiyclient.vercel.app', // Production client URL
       'http://localhost:5173',  // Local development
+
     ];
+    
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
+      callback(null, true); // Allow the request
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error('Not allowed by CORS')); // Deny the request
     }
   },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 // API routes
-app.use('/users', userRouter);
-app.use('/posts', postRouter);
-app.use('/comments', commentRouter);
+app.use("/users", userRouter);
+app.use("/posts", postRouter);
+app.use("/comments", commentRouter);
 
 // Error handling middleware
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
-    message: error.message || 'Something went wrong!',
+    message: error.message || "Something went wrong!",
     status: error.status,
     stack: error.stack,
   });
 });
 
-// Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Database connected"))
+  .catch(err => console.error("Database connection error:", err));
+
+
+// Server start
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  connectDB();
+  console.log(`Server is running on port ${port}`);
 });
