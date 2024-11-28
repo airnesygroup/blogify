@@ -1,17 +1,14 @@
-
-// https://vitejs.dev/config/
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
+// Vite config
 export default defineConfig({
   plugins: [react()],
-  base: '/',  // Set to the root if deploying to the root, otherwise adjust for sub-directory deployment.
+  base: '/',  // Use "/" if deploying to the root of your domain, adjust if deploying to a subdirectory
   build: {
-    outDir: 'build',  // The directory Vite will build to (e.g., 'build' or 'dist')
+    outDir: 'build', // Or 'dist', depending on your setup
     rollupOptions: {
-      input: '/src/main.jsx',  // Specify the entry file
+      input: '/src/main.jsx', // Make sure the entry file is correctly set
     },
   },
 })
-
