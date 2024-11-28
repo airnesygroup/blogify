@@ -49,7 +49,7 @@ app.use((error, req, res, next) => {
 });
 
 // Ensure DATABASE_URL is properly loaded from .env
-const mongoURI = process.env.DATABASE_URI;
+const mongoURI =  "mongodb+srv://airnesyinfo:airnesyinfo@cluster0.54a22.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&dbName=blog" ;
 if (!mongoURI) {
   console.error("DATABASE_URL is missing in .env");
   process.exit(1); // Exit if no DB URL is available
