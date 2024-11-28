@@ -1,16 +1,15 @@
 import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv"; // Ensure dotenv is imported first
 import connectDB from "../lib/connectDB.js";
 import userRouter from "../routes/user.route.js";
 import postRouter from "../routes/post.route.js";
 import commentRouter from "../routes/comment.route.js";
 import webhookRouter from "../routes/webhook.route.js";
-import { clerkMiddleware, requireAuth } from "@clerk/express";
 import cors from "cors";
-import mongoose from "mongoose";
 
-import dotenv from "dotenv";
-
-dotenv.config();
+// Load environment variables from .env file
+dotenv.config(); // Ensure .env is loaded at the top
 
 // Server setup
 const app = express();
@@ -18,11 +17,9 @@ const app = express();
 // CORS middleware
 app.use(cors({
   origin: function(origin, callback) {
-    // Allow requests from localhost during development
     const allowedOrigins = [
       'https://blogifiyclient.vercel.app', // Production client URL
       'http://localhost:5173',  // Local development
-
     ];
     
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -39,6 +36,7 @@ app.use(cors({
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
+app.use("/webhook", webhookRouter); // Make sure this route is properly set up
 
 // Error handling middleware
 app.use((error, req, res, next) => {
@@ -50,14 +48,23 @@ app.use((error, req, res, next) => {
   });
 });
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Database connected"))
-  .catch(err => console.error("Database connection error:", err));
+// Ensure DATABASE_URL is properly loaded from .env
+const mongoURI = process.env.DATABASE_URL;
+if (!mongoURI) {
+  console.error("DATABASE_URL is missing in .env");
+  process.exit(1); // Exit if no DB URL is available
+}
 
+// Connect to MongoDB
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB connected successfully!"))
+  .catch(err => {
+    console.error("Database connection error:", err);
+    process.exit(1); // Exit the app if DB connection fails
+  });
 
 // Server start
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  connectDB();
   console.log(`Server is running on port ${port}`);
 });
