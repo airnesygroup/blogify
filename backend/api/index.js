@@ -49,7 +49,7 @@ app.use((error, req, res, next) => {
 });
 
 // Ensure DATABASE_URL is properly loaded from .env
-const mongoURI = process.env.DATABASE_URL;
+const mongoURI = process.env.DATABASE_URI;
 if (!mongoURI) {
   console.error("DATABASE_URL is missing in .env");
   process.exit(1); // Exit if no DB URL is available
