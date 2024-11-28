@@ -1,15 +1,29 @@
 import express from 'express';
 import connectDB from './lib/connectDB.js';
-import userRouter from './routes/user.route.js';
-import postRouter from './routes/post.route.js';
-import commentRouter from './routes/comment.route.js';
-import webhookRouter from './routes/webhook.route.js';
+import userRouter from '../routes/user.route.js';
+import postRouter from '../routes/post.route.js';
+import commentRouter from '../routes/comment.route.js';
+import webhookRouter from '../routes/webhook.route.js';
 import { clerkMiddleware, requireAuth } from '@clerk/express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { createServer } from '@vercel/node'; // Import the serverless handler
+import fs from 'fs';
+import path from 'path';
 
 dotenv.config();
+
+// Use import.meta.url to get the directory name equivalent to __dirname
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
+// Make sure the path to 'lib' is correctly constructed
+const libPath = path.join(__dirname, 'lib');
+
+// Check if the 'lib' folder exists
+if (fs.existsSync(libPath)) {
+  console.log('Lib folder contents:', fs.readdirSync(libPath));
+} else {
+  console.error('Lib folder not found at:', libPath);
+}
 
 // Server setup
 const app = express();
@@ -46,5 +60,8 @@ app.use((error, req, res, next) => {
   });
 });
 
-// Create a serverless function handler
-export default createServer(app);
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
