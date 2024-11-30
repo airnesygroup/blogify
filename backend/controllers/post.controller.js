@@ -5,8 +5,8 @@ import User from "../models/user.model.js";
 // Hardcoded credentials for ImageKit
 const imagekit = new ImageKit({
   urlEndpoint: "https://ik.imagekit.io/duu0baatm",  // Replace with your actual URL Endpoint
-  publicKey: "public_yBrgN5njH4NLNA0ns0ts0T7A8b4=",  // Replace with your actual Public Key
-  privateKey: "twbR0TEZWdwnajELdEnygu31KJs="  // Replace with your actual Private Key
+  publicKey: "public_F6gpylB1rbMQM244+yeFKTj9xzI=",  // Replace with your actual Public Key
+  privateKey: "private_twbR0TEZWdwnajELdEnygu31KJs="  // Replace with your actual Private Key
 });
 
 export const getPosts = async (req, res) => {
